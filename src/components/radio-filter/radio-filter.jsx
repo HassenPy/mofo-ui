@@ -12,7 +12,7 @@ export default React.createClass({
   },
   getInitialState() {
     return {
-      activeFilter: this.props.initialChoice || this.props.options[0].value
+      activeFilter: this.props.value || this.props.initialChoice || this.props.options[0].value
     };
   },
   onChange: function () {
