@@ -200,6 +200,7 @@ let orgs = [
     className: `mozilla`
   }
 ];
+
 render((
   <App>
     <Switcher></Switcher>
