@@ -15,6 +15,35 @@ const App = React.createClass({
   }
 });
 
+var BoundRadioFilter = React.createClass({
+  getInitialState: function () {
+    return {
+      activeFilter: this.props.options[0].value,
+    };
+  },
+  onChoiceChange: function (e) {
+    this.setState({
+      activeFilter: ((e.target) ? e.target.value : e),
+    });
+  },
+  render() {
+    return (
+      <div>
+        <h3>RadioFilter with value bound to external state</h3>
+        <p>example with two way binding</p>
+
+        <select value={this.state.activeFilter} onChange={this.onChoiceChange} name="topic" id="topic" className="c-select form-control wide">
+          {this.props.options.map(filter => {
+            return <option key={filter.value} value={filter.value}>{filter.label}</option>;
+          })}
+        </select>
+
+        <RadioFilter value={this.state.activeFilter} onChange={this.onChoiceChange} options={this.props.options}></RadioFilter>
+      </div>
+    );
+  }
+});
+
 const Switcher = React.createClass({
   getInitialState () {
     return {
@@ -171,7 +200,6 @@ let orgs = [
     className: `mozilla`
   }
 ];
-
 render((
   <App>
     <Switcher></Switcher>
@@ -191,6 +219,8 @@ render((
       <h3>RadioFilter</h3>
 
       <RadioFilter options={radioOptions} initialChoice={`date_created`} onChange={handleRadioChange}></RadioFilter>
+
+      <BoundRadioFilter options={radioOptions}></BoundRadioFilter>
 
       <h3>TabSwitcher</h3>
 
